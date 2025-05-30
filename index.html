@@ -10,30 +10,72 @@
     <script>
         console.log("Hello World!");
 
+        const options = ["rock", "paper", "scissors"];
         let computerChoice;
         let humanChoice;
+        let computerScore = 0, humanScore = 0;
 
         function getComputerChoice () {
-            let randomNumber = Math.floor(Math.random() * 3) + 1; // Number between 1 and 3
+            let randomNumber = Math.floor(Math.random() * 3); // Number between 0 and 2
 
-            if (randomNumber === 1) {
-                return "rock";
-            } else if (randomNumber === 2) {
-                return "paper";
-            } else {
-                return "scissors";
-            }
+            return options[randomNumber];
         }
 
         function getHumanChoice () {
-            return prompt("Introduce your choice(rock, paper or scissors):");
+            return prompt(`Introduce your choice(${options}):`);
         }
 
-        computerChoice = getComputerChoice();
+        function playRound (humanChoice, computerChoice) {
+            if (humanChoice === options[0]) {
+                if (computerChoice === options[0]) {
+                    console.log("Tie");
+                } else if (computerChoice === options[1]) {
+                    computerScore++;
+                    console.log("Computer Wins!");
+                } else {
+                    console.log("Human Wins!");
+                    humanScore++;
+                }
+            } else if (humanChoice === options[1]) {
+                if (computerChoice === options[0]) {
+                    console.log("Human Wins!");
+                    humanScore++;
+                } else if (computerChoice === options[1]) {
+                    console.log("Tie");
+                } else {
+                    computerScore++;
+                    console.log("Computer Wins!");
+                }
+            } else {
+                if (computerChoice === options[0]) {
+                    computerScore++;
+                    console.log("Computer Wins!");
+                } else if (computerChoice === options[1]) {
+                    console.log("Human Wins!");
+                    humanChoice++;
+                } else {
+                    console.log("Tie");
+                }
+            }
+        }
 
-        humanChoice = getHumanChoice();
+        function playGame () {
+            let i = 0;
+            while (i < 5) {
+                computerChoice = getComputerChoice();
+                humanChoice = getHumanChoice();
 
-        console.log("Computer Choice: " + computerChoice + "\nHuman Choice: " + humanChoice);
+                console.log("Computer Choice: " + computerChoice + "\nHuman Choice: " + humanChoice);
+
+                playRound(humanChoice, computerChoice);
+
+                i++;
+            }
+
+            console.log("Computer Score: " + computerScore + "\nHuman Score: " + humanScore);
+        }
+
+        playGame();
     </script>
 </body>
 </html>
