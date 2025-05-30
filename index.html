@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <h1>If you want to play, open the terminal</h1>
+    <script>
+        console.log("Hello World!");
+
+        let computerChoice;
+        let humanChoice;
+
+        function getComputerChoice () {
+            let randomNumber = Math.floor(Math.random() * 3) + 1; // Number between 1 and 3
+
+            if (randomNumber === 1) {
+                return "rock";
+            } else if (randomNumber === 2) {
+                return "paper";
+            } else {
+                return "scissors";
+            }
+        }
+
+        function getHumanChoice () {
+            return prompt("Introduce your choice(rock, paper or scissors):");
+        }
+
+        computerChoice = getComputerChoice();
+
+        humanChoice = getHumanChoice();
+
+        console.log("Computer Choice: " + computerChoice + "\nHuman Choice: " + humanChoice);
+    </script>
+</body>
+</html>
