@@ -10,6 +10,10 @@
     <button class="Rock">Rock</button>
     <button class="Paper">Paper</button>
     <button class="Scissors">Scissors</button>
+    <div class="display"></div>
+
+
+
     <script>
         console.log("Hello World!");
 
@@ -18,9 +22,22 @@
         let humanChoice;
         let computerScore = 0, humanScore = 0;
 
-        let rockBtn = document.querySelector(".Rock");
-        let paperBtn = document.querySelector(".Paper");
-        let scissorsBtn = document.querySelector(".Scissors");
+        const rockBtn = document.querySelector(".Rock");
+        const paperBtn = document.querySelector(".Paper");
+        const scissorsBtn = document.querySelector(".Scissors");
+
+        const display = document.querySelector(".display");
+        const announceOptions = document.createElement("p");
+        const announceWinner = document.createElement("p");
+        const announceScore = document.createElement("p");
+
+        display.appendChild(announceOptions);
+        display.appendChild(announceWinner);
+        display.appendChild(announceScore);
+
+        rockBtn.addEventListener("click", () => {playGame("rock")});
+        paperBtn.addEventListener("click", () => {playGame("paper")});
+        scissorsBtn.addEventListener("click", () => {playGame("scissors")});
 
         function getComputerChoice () {
             let randomNumber = Math.floor(Math.random() * 3); // Number between 0 and 2
@@ -28,40 +45,36 @@
             return options[randomNumber];
         }
 
-        function getHumanChoice () {
-            return prompt(`Introduce your choice(${options}):`);
-        }
-
         function playRound (humanChoice, computerChoice) {
             if (humanChoice === options[0]) {
                 if (computerChoice === options[0]) {
-                    console.log("Tie");
+                    //announceWinner.textContent = "Result: Tie";
                 } else if (computerChoice === options[1]) {
                     computerScore++;
-                    console.log("Computer Wins!");
+                    //announceWinner.textContent = "Result: Computer Wins!";
                 } else {
                     humanScore++;
-                    console.log("Human Wins!");
+                    //announceWinner.textContent = "Result: Human Wins!";
                 }
             } else if (humanChoice === options[1]) {
                 if (computerChoice === options[0]) {
                     humanScore++;
-                    console.log("Human Wins!");
+                    //announceWinner.textContent = "Result: Human Wins!";
                 } else if (computerChoice === options[1]) {
-                    console.log("Tie");
+                    //announceWinner.textContent = "Result: Tie";
                 } else {
                     computerScore++;
-                    console.log("Computer Wins!");
+                    //announceWinner.textContent = "Result: Computer Wins!";
                 }
             } else {
                 if (computerChoice === options[0]) {
                     computerScore++;
-                    console.log("Computer Wins!");
+                    //announceWinner.textContent = "Result: Computer Wins!";
                 } else if (computerChoice === options[1]) {
                     humanChoice++;
-                    console.log("Human Wins!");
+                    //announceWinner.textContent = "Result: Human Wins!";
                 } else {
-                    console.log("Tie");
+                    //announceWinner.textContent = "Result: Tie";
                 }
             }
         }
@@ -69,16 +82,24 @@
         function playGame (selection) {
             computerChoice = getComputerChoice();
 
-            console.log("Computer Choice: " + computerChoice + "\nHuman Choice: " + selection);
+            announceWinner.textContent = "";
+
+            announceOptions.textContent = "Computer Choice: " + computerChoice + "\nHuman Choice: " + selection;
 
             playRound(selection, computerChoice);
 
-            console.log("Computer Score: " + computerScore + "\nHuman Score: " + humanScore);
-        }
+            announceScore.textContent = "Computer Score: " + computerScore + "\nHuman Score: " + humanScore
 
-        rockBtn.addEventListener("click", () => {playGame("rock")});
-        paperBtn.addEventListener("click", () => {playGame("paper")});
-        scissorsBtn.addEventListener("click", () => {playGame("scissors")});
+            if (computerScore >= 5) {
+                announceWinner.textContent = "Computer Wins the Game!";
+                computerScore = 0;
+                humanScore = 0;
+            } else if (humanScore >= 5) {
+                announceWinner.textContent = "Human Wins the Game!";
+                computerScore = 0;
+                humanScore = 0;
+            }
+        }
     </script>
 </body>
 </html>
