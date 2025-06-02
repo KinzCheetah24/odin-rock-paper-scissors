@@ -6,7 +6,10 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
-    <h1>If you want to play, open the terminal</h1>
+    <h1>Welcome to Rock Paper Scissors, select one option to play:</h1>
+    <button class="Rock">Rock</button>
+    <button class="Paper">Paper</button>
+    <button class="Scissors">Scissors</button>
     <script>
         console.log("Hello World!");
 
@@ -14,6 +17,10 @@
         let computerChoice;
         let humanChoice;
         let computerScore = 0, humanScore = 0;
+
+        let rockBtn = document.querySelector(".Rock");
+        let paperBtn = document.querySelector(".Paper");
+        let scissorsBtn = document.querySelector(".Scissors");
 
         function getComputerChoice () {
             let randomNumber = Math.floor(Math.random() * 3); // Number between 0 and 2
@@ -33,13 +40,13 @@
                     computerScore++;
                     console.log("Computer Wins!");
                 } else {
-                    console.log("Human Wins!");
                     humanScore++;
+                    console.log("Human Wins!");
                 }
             } else if (humanChoice === options[1]) {
                 if (computerChoice === options[0]) {
-                    console.log("Human Wins!");
                     humanScore++;
+                    console.log("Human Wins!");
                 } else if (computerChoice === options[1]) {
                     console.log("Tie");
                 } else {
@@ -51,31 +58,27 @@
                     computerScore++;
                     console.log("Computer Wins!");
                 } else if (computerChoice === options[1]) {
-                    console.log("Human Wins!");
                     humanChoice++;
+                    console.log("Human Wins!");
                 } else {
                     console.log("Tie");
                 }
             }
         }
 
-        function playGame () {
-            let i = 0;
-            while (i < 5) {
-                computerChoice = getComputerChoice();
-                humanChoice = getHumanChoice();
+        function playGame (selection) {
+            computerChoice = getComputerChoice();
 
-                console.log("Computer Choice: " + computerChoice + "\nHuman Choice: " + humanChoice);
+            console.log("Computer Choice: " + computerChoice + "\nHuman Choice: " + selection);
 
-                playRound(humanChoice, computerChoice);
-
-                i++;
-            }
+            playRound(selection, computerChoice);
 
             console.log("Computer Score: " + computerScore + "\nHuman Score: " + humanScore);
         }
 
-        playGame();
+        rockBtn.addEventListener("click", () => {playGame("rock")});
+        paperBtn.addEventListener("click", () => {playGame("paper")});
+        scissorsBtn.addEventListener("click", () => {playGame("scissors")});
     </script>
 </body>
 </html>
